@@ -17,7 +17,6 @@ function handleClick(e) {
 		e.target.style.color = nextClickX?"red":"black";
 		nextClickX = ! nextClickX;
 		const whoWon = checkWhoWon();
-		console.log("who won:" + whoWon);
 		if (whoWon) {
 			setTimeout(()=>{// I put this in to give the X or O time to render from the innerText above.
 				alert('Yay! Go ' + whoWon);
@@ -38,12 +37,16 @@ function checkWhoWon() {
 	let allOIsColRow;
 	let allXsRowCol;
 	let allOsRowCol;
+
+	let populatedCellsCount=0;
 	for (let i=0;i<3;i++) {
 		allXsColRow=true;
 		allOsColRow=true;
 		allXsRowCol=true;
 		allOsRowCol=true;
 		for(let j=0;j<3;j++) {
+			
+			if (state[i][j]!==0) populatedCellsCount++;
 			if (state[i][j]===0) {
 				allXsRowCol=false;
 				allOsRowCol=false;
@@ -61,8 +64,8 @@ function checkWhoWon() {
 				allXsColRow = false;
 			}
 		}
-		if (allXsColRow) return 'X';
-		if (allOsColRow) return 'O';
+		if (allXsRowCol || allXsColRow) return 'X';
+		if (allOsRowCol || allOsColRow) return 'O';
 
 	}
 	// last check the diagonal:
@@ -93,6 +96,7 @@ function checkWhoWon() {
 	}
 	if (allXsTopRightToBottomLeft || allXsTopLeftToBottomRight) return 'X';
 	if (allOsTopRightToBottomLeft || allOsTopLeftToBottomRight) return 'O';
+	if (populatedCellsCount===9) return "draw";
 	return false;
 }
 function buildBoard() {
@@ -103,7 +107,7 @@ function buildBoard() {
 	    parentDiv.removeChild(parentDiv.firstChild);
 	}
 	parentDiv.addEventListener("click",handleClick);// will this add a second listener?
-	console.log(parentDiv);
+	
 	if (!parentDiv) return false;
 	for (let row=0;row<3;row++) {
 		let rowDiv = document.createElement('div');
