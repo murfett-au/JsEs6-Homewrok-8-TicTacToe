@@ -1,0 +1,21 @@
+.cell {
+	width:20px;
+	height:20px;
+	padding:2px;
+	border: solid 1px black;
+	margin: 3px;
+	display:inline-block;
+}
+.row {
+	width:97px;
+	height:28px;
+	margin:1px
+	border:0px;
+
+}
+.board {
+	display: inline-block;
+	width:99px;
+	height:99px;
+	border:dashed;
+}
