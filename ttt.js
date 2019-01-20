@@ -34,7 +34,6 @@ function handleClick(e) {
 
 }
 function checkWhoWon() {
-	console.log(state);
 	let allXsColRow;
 	let allOIsColRow;
 	let allXsRowCol;
@@ -45,8 +44,6 @@ function checkWhoWon() {
 		allXsRowCol=true;
 		allOsRowCol=true;
 		for(let j=0;j<3;j++) {
-			console.log("i="+i);
-			console.log("j="+j);
 			if (state[i][j]===0) {
 				allXsRowCol=false;
 				allOsRowCol=false;
